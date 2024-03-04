@@ -1,0 +1,383 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background-color: #F9F7F7;
+    color: #344E41;
+    min-height: 100vh; /* Ensure the body fills the entire viewport height */
+    position: relative;
+}
+
+header {
+    background-color: #344E41;
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.header-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('path/to/your/background-pattern.png'); /* Replace 'path/to/your/background-pattern.png' with the actual path to your background pattern image */
+    opacity: 0.1; /* Adjust the opacity as needed */
+    z-index: -1;
+}
+
+header h1 {
+    font-size: 3rem;
+    color: #F9F7F7;
+    margin-bottom: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #F9F7F7;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: color 0.3s ease, transform 0.2s ease; /* Add transition for transform */
+    margin-right: 5px; /* Add a small margin between buttons */
+}
+
+nav ul li a:hover {
+    color: #A3B18A;
+    transform: translateY(-3px); /* Apply translateY transform on hover */
+    z-index: 1; /* Ensure the hovered button appears on top */
+}
+
+main {
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.module {
+    flex: 1;
+    padding: 30px;
+    border-radius: 20px;
+    background-color: #F9F7F7;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.module:hover {
+    transform: translateY(-5px);
+}
+
+.module h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #344E41;
+}
+
+footer {
+    text-align: center;
+    background-color: #344E41;
+    padding: 20px 0;
+    color: #F9F7F7;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    font-size: 0.8rem;
+}
+
+/* Add this CSS to your existing styles.css */
+.module {
+    flex: 1;
+    padding: 30px;
+    border-radius: 20px;
+    background-color: #F9F7F7;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+
+
+.module h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #344E41;
+}
+
+.module.expanded {
+    position: absolute;
+    top: calc(50% + 50px); /* Adjust for header height */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #F9F7F7; /* Adjust background color as needed */
+    z-index: 9999;
+    animation: expandModule 0.5s ease forwards; /* Add animation */
+}
+
+@keyframes expandModule {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+    100% {
+        width: calc(100% - 60px); /* Adjust for padding/margin */
+        height: calc(100% - 120px); /* Adjust for padding/margin */
+        opacity: 1;
+    }
+}
+
+.todo-content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #F9F7F7;
+    border-radius: 10px;
+}
+
+.task-input-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#task-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#task-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+    color: #344E41;
+}
+
+#task-list li.completed {
+    text-decoration: line-through;
+}
+
+#new-task {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-bottom: 2px solid #A3B18A;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    background-color: transparent;
+    color: #344E41;
+}
+
+
+
+.todo-content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #F9F7F7;
+    border-radius: 10px;
+    position: relative; /* Add relative positioning */
+}
+
+
+
+#task-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-family: 'Space Grotesk', sans-serif;
+    color: #344E41;
+    position: relative; /* Add relative positioning */
+}
+
+
+.trash-icon-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: auto; /* Push the container to the right */
+}
+
+.trash-icon {
+    width: 16px; /* Adjust the size as needed */
+    height: 16px;
+    cursor: pointer;
+}
+
+/* styles.css */
+/* ... (existing styles) */
+
+.progress-bar-container {
+    width: 100%;
+    height: 20px;
+    background-color: #F9F7F7;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 100%;
+    background-color: #e0e0e0;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #A3B18A;
+    transition: width 0.5s ease;
+    position: relative;
+}
+
+.progress-fill::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 100%;
+    height: 200%;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.5), transparent 70%);
+    animation: progressAnimation 3s infinite;
+}
+
+.progress-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    font-weight: bold;
+    color: #344E41;
+}
+
+@keyframes progressAnimation {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* styles.css */
+/* ... (existing styles) */
+
+.timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.timer-mode-buttons {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.timer-mode-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #344E41;
+    color: #F9F7F7;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+.timer-mode-btn:hover {
+    background-color: #A3B18A;
+}
+
+.timer-mode-btn.active {
+    background-color: #A3B18A;
+}
+
+.timer-circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.timer-value {
+    font-size: 36px;
+    font-weight: bold;
+    color: #344E41;
+}
+
+.timer-controls {
+    margin-top: 20px;
+}
+
+.timer-btn {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #344E41;
+    color: #F9F7F7;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.timer-btn:hover {
+    background-color: #A3B18A;
+}
+
+.timer-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #A3B18A;
+}
+
+.countdown-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #A3B18A;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scale(1);
+    transition: transform 1s ease-in-out;
+}
+
+.countdown-circle.animate {
+    animation: countdown 1s infinite linear;
+}
+
+@keyframes countdown {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
+}

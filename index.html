@@ -1,0 +1,68 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foco - Productivity Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-pattern"></div>
+        <h1>Foco</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#" id="time-btn">Time</a></li>
+                <li><a href="#" id="todo-btn">To-Do List</a></li>
+                <li><a href="#" id="progress-btn">Progress</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="module-container">
+            <section id="time" class="module">
+                <h2>Stopwatch</h2>
+                <div class="timer-container">
+                    <div class="timer-circle">
+                        <span class="timer-value">00:00</span>
+                    </div>
+                    <div class="timer-controls">
+                        <button class="timer-btn" id="start-timer">Start</button>
+                        <button class="timer-btn" id="reset-timer">Reset</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="module-container">
+            <section id="todo" class="module">
+                <h2>To-Do List</h2>
+                <div class="todo-content">
+                    <ul id="task-list" tabindex="0">
+                        <!-- Tasks will be dynamically added here -->
+                    </ul>
+                    <input type="text" id="new-task" class="typewriter" placeholder="">
+                </div>
+            </section>
+        </div>
+        <div class="module-container">
+            <section id="progress" class="module">
+                <h2>Progress</h2>
+                <div class="progress-bar-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <span class="progress-value">0%</span>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <p>© 2024 Foco. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
