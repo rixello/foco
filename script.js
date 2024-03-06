@@ -1,20 +1,19 @@
-// script.js
 document.addEventListener('DOMContentLoaded', function () {
-    // Toggle module expansion
     const modules = document.querySelectorAll('.module');
 
     modules.forEach(function (module) {
-        module.addEventListener('click', function () {
-            modules.forEach(function (otherModule) {
-                if (otherModule !== module) {
-                    otherModule.classList.remove('expanded');
-                }
-            });
-            module.classList.toggle('expanded');
+        module.addEventListener('click', function (event) {
+            if (!event.target.closest('.priority-buttons, #priority-select, .timer-controls, #task-list')) {
+                modules.forEach(function (otherModule) {
+                    if (otherModule !== module) {
+                        otherModule.classList.remove('expanded');
+                    }
+                });
+                module.classList.toggle('expanded');
+            }
         });
     });
 
-    // Toggle to-do list content visibility
     const todoModule = document.getElementById('todo');
     const todoContent = todoModule.querySelector('.todo-content');
 
@@ -24,58 +23,46 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Typewriter effect for the input field
-    const newTaskInput = document.getElementById('new-task');
     const taskList = document.getElementById('task-list');
+    const newTaskInput = document.getElementById('new-task');
+    const prioritySelect = document.getElementById('priority-select');
+    const priorityButtons = document.querySelectorAll('.priority-btn');
 
-    let i = 0;
-    const txt = 'Add a new task...';
-    const speed = 50;
-
-    function typeWriter() {
-        if (i < txt.length) {
-            newTaskInput.placeholder += txt.charAt(i);
-            i++;
-            setTimeout(typeWriter, speed);
-        }
-    }
-
-    typeWriter();
-
-    // Retrieve tasks from local storage
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
-    // Add a new task
-    function addTask(taskText = '') {
+    function addTask(taskText, priority) {
         const taskItem = document.createElement('li');
-        taskItem.appendChild(document.createTextNode(taskText));
+        taskItem.textContent = taskText;
+        taskItem.dataset.priority = priority;
+
+        if (priority === 'high') {
+            taskItem.style.color = '#081c15';
+        } else if (priority === 'medium') {
+            taskItem.style.color = '#1b4332';
+        } else {
+            taskItem.style.color = '#2d6a4f';
+        }
+
+        taskItem.addEventListener('click', function () {
+            this.classList.toggle('completed');
+            updateProgressBar();
+        });
 
         const trashIconContainer = document.createElement('span');
         trashIconContainer.classList.add('trash-icon-container');
 
         const trashIcon = document.createElement('img');
-        trashIcon.src = 'trash.png'; // Replace with the actual path to your trash icon image
+        trashIcon.src = 'trash.png';
         trashIcon.classList.add('trash-icon');
 
         trashIconContainer.appendChild(trashIcon);
         taskItem.appendChild(trashIconContainer);
 
-        // Add a click event listener to each task item to toggle completed class
-        taskItem.addEventListener('click', function (event) {
-            if (!event.target.classList.contains('trash-icon')) {
-                // Stop the event from bubbling up to the module element
-                event.stopPropagation();
-                taskItem.classList.toggle('completed');
-                updateProgressBar();
-            }
-        });
-
-        // Add a click event listener to each trash icon to delete the task
         trashIcon.addEventListener('click', function (event) {
-            event.stopPropagation(); // Stop the event from bubbling up to the task item
+            event.stopPropagation();
             taskList.removeChild(taskItem);
             tasks = tasks.filter(function (task) {
-                return task !== taskText;
+                return task.text !== taskText;
             });
             localStorage.setItem('tasks', JSON.stringify(tasks));
             updateProgressBar();
@@ -84,25 +71,50 @@ document.addEventListener('DOMContentLoaded', function () {
         taskList.appendChild(taskItem);
 
         if (taskText !== '') {
-            tasks.push(taskText);
+            tasks.push({ text: taskText, priority: priority });
             localStorage.setItem('tasks', JSON.stringify(tasks));
             newTaskInput.value = '';
         }
     }
 
-    // Event listener to add a new task when Enter key is pressed
     newTaskInput.addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
-            addTask(newTaskInput.value.trim());
+            const taskText = newTaskInput.value.trim();
+            const priority = prioritySelect.value;
+            addTask(taskText, priority);
             updateProgressBar();
         }
     });
 
-    // Progress Bar
+    priorityButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            const priority = this.dataset.priority;
+            filterTasksByPriority(priority);
+            priorityButtons.forEach(function (btn) {
+                btn.classList.remove('active');
+            });
+            this.classList.add('active');
+        });
+    });
+
+    function filterTasksByPriority(priority) {
+        const taskItems = taskList.querySelectorAll('li');
+        taskItems.forEach(function (taskItem) {
+            if (priority === 'all' || taskItem.dataset.priority === priority) {
+                taskItem.style.display = 'flex';
+            } else {
+                taskItem.style.display = 'none';
+            }
+        });
+    }
+
+    tasks.forEach(function (task) {
+        addTask(task.text, task.priority);
+    });
+
     const progressFill = document.querySelector('.progress-fill');
     const progressValue = document.querySelector('.progress-value');
 
-    // Update progress bar
     function updateProgressBar() {
         const completedTasks = document.querySelectorAll('#task-list li.completed');
         const totalTasks = document.querySelectorAll('#task-list li');
@@ -111,25 +123,35 @@ document.addEventListener('DOMContentLoaded', function () {
         progressValue.textContent = `${progress}%`;
     }
 
-    // Call updateProgressBar initially
     updateProgressBar();
 
-    // Timer
     const startTimerBtn = document.getElementById('start-timer');
     const resetTimerBtn = document.getElementById('reset-timer');
     const timerValue = document.querySelector('.timer-value');
 
     let timerInterval;
     let totalSeconds = 0;
+    let isTimerRunning = false;
 
     function startTimer() {
-        timerInterval = setInterval(function () {
-            totalSeconds++;
-            updateTimerDisplay();
-        }, 1000);
+        if (!isTimerRunning) {
+            timerInterval = setInterval(function () {
+                totalSeconds++;
+                updateTimerDisplay();
+            }, 1000);
 
-        startTimerBtn.disabled = true;
-        resetTimerBtn.disabled = false;
+            startTimerBtn.textContent = 'Pause';
+            resetTimerBtn.disabled = false;
+            isTimerRunning = true;
+        } else {
+            pauseTimer();
+        }
+    }
+
+    function pauseTimer() {
+        clearInterval(timerInterval);
+        startTimerBtn.textContent = 'Start';
+        isTimerRunning = false;
     }
 
     function resetTimer() {
@@ -137,8 +159,9 @@ document.addEventListener('DOMContentLoaded', function () {
         totalSeconds = 0;
         updateTimerDisplay();
 
-        startTimerBtn.disabled = false;
+        startTimerBtn.textContent = 'Start';
         resetTimerBtn.disabled = true;
+        isTimerRunning = false;
     }
 
     function updateTimerDisplay() {
@@ -153,7 +176,6 @@ document.addEventListener('DOMContentLoaded', function () {
     startTimerBtn.addEventListener('click', startTimer);
     resetTimerBtn.addEventListener('click', resetTimer);
 
-    // Keyboard Shortcuts
     document.addEventListener('keydown', function (e) {
         if (e.key === 'n' && e.metaKey) {
             newTaskInput.focus();

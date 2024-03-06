@@ -8,7 +8,7 @@ body {
     font-family: 'Space Grotesk', sans-serif;
     background-color: #F9F7F7;
     color: #344E41;
-    min-height: 100vh; /* Ensure the body fills the entire viewport height */
+    min-height: 100vh; 
     position: relative;
 }
 
@@ -26,8 +26,7 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('path/to/your/background-pattern.png'); /* Replace 'path/to/your/background-pattern.png' with the actual path to your background pattern image */
-    opacity: 0.1; /* Adjust the opacity as needed */
+    opacity: 0.1; 
     z-index: -1;
 }
 
@@ -51,14 +50,14 @@ nav ul li a {
     color: #F9F7F7;
     font-weight: bold;
     font-size: 1.2rem;
-    transition: color 0.3s ease, transform 0.2s ease; /* Add transition for transform */
-    margin-right: 5px; /* Add a small margin between buttons */
+    transition: color 0.3s ease, transform 0.2s ease; 
+    margin-right: 5px; 
 }
 
 nav ul li a:hover {
     color: #A3B18A;
-    transform: translateY(-3px); /* Apply translateY transform on hover */
-    z-index: 1; /* Ensure the hovered button appears on top */
+    transform: translateY(-3px);
+    z-index: 1; 
 }
 
 main {
@@ -120,12 +119,12 @@ footer p {
 
 .module.expanded {
     position: absolute;
-    top: calc(50% + 50px); /* Adjust for header height */
+    top: calc(50% + 50px);
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #F9F7F7; /* Adjust background color as needed */
+    background-color: #F9F7F7;
     z-index: 9999;
-    animation: expandModule 0.5s ease forwards; /* Add animation */
+    animation: expandModule 0.5s ease forwards; 
 }
 
 @keyframes expandModule {
@@ -135,8 +134,8 @@ footer p {
         opacity: 0;
     }
     100% {
-        width: calc(100% - 60px); /* Adjust for padding/margin */
-        height: calc(100% - 120px); /* Adjust for padding/margin */
+        width: calc(100% - 60px); 
+        height: calc(100% - 120px); 
         opacity: 1;
     }
 }
@@ -192,7 +191,7 @@ footer p {
     padding: 20px;
     background-color: #F9F7F7;
     border-radius: 10px;
-    position: relative; /* Add relative positioning */
+    position: relative; 
 }
 
 
@@ -203,24 +202,21 @@ footer p {
     margin-bottom: 10px;
     font-family: 'Space Grotesk', sans-serif;
     color: #344E41;
-    position: relative; /* Add relative positioning */
+    position: relative; 
 }
 
 
 .trash-icon-container {
     display: flex;
     justify-content: flex-end;
-    margin-left: auto; /* Push the container to the right */
+    margin-left: auto;
 }
 
 .trash-icon {
-    width: 16px; /* Adjust the size as needed */
+    width: 16px;
     height: 16px;
     cursor: pointer;
 }
-
-/* styles.css */
-/* ... (existing styles) */
 
 .progress-bar-container {
     width: 100%;
@@ -276,9 +272,6 @@ footer p {
         transform: translate(-50%, -50%) rotate(360deg);
     }
 }
-
-/* styles.css */
-/* ... (existing styles) */
 
 .timer-container {
     display: flex;
@@ -379,5 +372,134 @@ footer p {
     }
     100% {
         transform: scale(0);
+    }
+}
+
+.todo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.priority-buttons {
+    display: flex;
+}
+
+.priority-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e0e0e0;
+    color: #344E41;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.priority-btn.active {
+    background-color: #A3B18A;
+    color: #F9F7F7;
+}
+
+.task-input-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+#priority-select {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e0e0e0;
+    color: #344E41;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    header {
+        padding: 10px 0;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    nav ul li {
+        margin-right: 10px;
+    }
+
+    nav ul li a {
+        font-size: 1rem;
+    }
+
+    main {
+        flex-direction: column;
+        padding: 10px;
+        min-height: calc(100vh - 140px);
+    }
+
+    .module-container {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .module-container:nth-child(2) {
+        order: 1;
+    }
+
+    .module-container:nth-child(3) {
+        order: 2;
+    }
+
+    .module-container:nth-child(1) {
+        order: 3;
+    }
+
+    .module {
+        padding: 20px;
+    }
+
+    .module h2 {
+        font-size: 1.5rem;
+    }
+
+    .todo-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .priority-buttons {
+        margin-top: 10px;
+    }
+
+    .timer-circle {
+        width: 150px;
+        height: 150px;
+    }
+
+    .timer-value {
+        font-size: 24px;
+    }
+
+    .progress-bar-container {
+        height: 15px;
+    }
+
+    .progress-value {
+        font-size: 12px;
+    }
+
+    footer {
+        position: relative;
+        bottom: auto;
     }
 }

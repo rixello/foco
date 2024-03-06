@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,11 +39,27 @@
         <div class="module-container">
             <section id="todo" class="module">
                 <h2>To-Do List</h2>
+                <div class="todo-header">
+                    <h3>Priority</h3>
+                    <div class="priority-buttons">
+                        <button class="priority-btn active" data-priority="all">All</button>
+                        <button class="priority-btn" data-priority="high">High</button>
+                        <button class="priority-btn" data-priority="medium">Medium</button>
+                        <button class="priority-btn" data-priority="low">Low</button>
+                    </div>
+                </div>
                 <div class="todo-content">
                     <ul id="task-list" tabindex="0">
-                        <!-- Tasks will be dynamically added here -->
+                        <!-- tasks will be added here -->
                     </ul>
-                    <input type="text" id="new-task" class="typewriter" placeholder="">
+                    <div class="task-input-container">
+                        <input type="text" id="new-task" placeholder="Add a new task...">
+                        <select id="priority-select">
+                            <option value="high">High</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
                 </div>
             </section>
         </div>
