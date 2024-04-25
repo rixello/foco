@@ -11,32 +11,9 @@
     <header>
         <div class="header-pattern"></div>
         <h1>Foco</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#" id="time-btn">Time</a></li>
-                <li><a href="#" id="todo-btn">To-Do List</a></li>
-                <li><a href="#" id="progress-btn">Progress</a></li>
-                <li><a href="#">Settings</a></li>
-            </ul>
-        </nav>
     </header>
     <main>
-        <div class="module-container">
-            <section id="time" class="module">
-                <h2>Stopwatch</h2>
-                <div class="timer-container">
-                    <div class="timer-circle">
-                        <span class="timer-value">00:00</span>
-                    </div>
-                    <div class="timer-controls">
-                        <button class="timer-btn" id="start-timer">Start</button>
-                        <button class="timer-btn" id="reset-timer">Reset</button>
-                    </div>
-                </div>
-            </section>
-        </div>
-        <div class="module-container">
+        <div class="module-container" id="todo-container">
             <section id="todo" class="module">
                 <h2>To-Do List</h2>
                 <div class="todo-header">
@@ -63,7 +40,21 @@
                 </div>
             </section>
         </div>
-        <div class="module-container">
+        <div class="module-container" id="stopwatch-container">
+            <section id="time" class="module">
+                <h2>Stopwatch</h2>
+                <div class="timer-container">
+                    <div class="timer-circle">
+                        <span class="timer-value">00:00</span>
+                    </div>
+                    <div class="timer-controls">
+                        <button class="timer-btn" id="start-timer">Start</button>
+                        <button class="timer-btn" id="reset-timer">Reset</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="module-container" id="progress-container">
             <section id="progress" class="module">
                 <h2>Progress</h2>
                 <div class="progress-bar-container">
@@ -78,6 +69,21 @@
     <footer>
         <p>© 2024 Foco. All rights reserved.</p>
     </footer>
+    <div id="terminal-overlay" class="hidden">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <span class="terminal-title">Foco Terminal</span>
+                <button id="close-terminal">&#10005;</button>
+            </div>
+            <div class="terminal-content">
+                <div class="terminal-output"></div>
+                <div class="terminal-input-container">
+                    <span class="terminal-prompt">user@foco:~$</span>
+                    <input type="text" id="terminal-input" autofocus>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
